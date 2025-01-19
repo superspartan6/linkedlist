@@ -43,9 +43,8 @@ class LinkedList():
 
 
     def insert_value(self, index, value):
-        if self.size < index or index < 0: #index out of range
-            print("Index out of range")
-            return -1
+        if self.size < index or index < 0:
+            raise Exception("Out of range")
         else:
             node = self.Node(value)
             self.size += 1
@@ -100,8 +99,7 @@ class LinkedList():
 
     def remove_index(self, index):
         if self.size < index or self.size < 1 or index < 0: #index out of range
-            print("Index out of range")
-            return -1
+            raise Exception("Out of range")
         else:
             if index == 0:
                 self.head = self.head.next
@@ -122,7 +120,7 @@ class LinkedList():
 
 
 
-    def search_value(self, value): # Returns the index for first matching value
+    def search_value(self, value): # Returns the index for first matching value or None if none found
         currentnode = self.head
 
         index = 0
@@ -131,11 +129,11 @@ class LinkedList():
                 return index
             currentnode = currentnode.next
             index += 1
-        return -1
+        return None
     
 
 
-    def search_all_value(self, value): # Returns list of index values for each matching value 
+    def search_all_value(self, value): # Returns list of index values for each matching value (empty list if none found)
         currentnode = self.head
         indexes = []
 
@@ -151,8 +149,7 @@ class LinkedList():
 
     def search_index(self, index): # Returns value at index
         if self.size < index or self.size < 1 or index < 0: #index out of range
-            print("Index out of range")
-            return -1
+            raise Exception("Out of range")
         else:
             currentnode = self.head
             for _ in range(index):
@@ -161,10 +158,9 @@ class LinkedList():
 
 
 
-    def update_index(self, index, value): # by index
+    def update_index(self, index, value): # Update value at index
         if self.size < index or self.size < 1 or index < 0: #index out of range
-            print("Index out of range")
-            return -1
+            raise Exception("Out of range")
         else:
             currentnode = self.head
             for _ in range(index):
@@ -175,11 +171,6 @@ class LinkedList():
 
     def get_size(self):
         return self.size
-
-
-
-    def sort(self):
-        pass
 
 
 
