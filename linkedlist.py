@@ -1,5 +1,5 @@
-class linkedlist():
-    class node():
+class LinkedList():
+    class Node():
         def __init__(self, value):
             self.value = value
             self.next = None
@@ -10,8 +10,26 @@ class linkedlist():
 
 
 
-    def addValue(self, value):
-        node = self.node(value)
+    class _Iterator():
+        def __init__(self, start_node):
+            self.current = start_node
+
+        def __iter__(self):
+            return self
+
+        def __next__(self):
+            if self.current == None:
+                raise StopIteration
+            value = self.current.value
+            self.current = self.current.next
+            return value
+
+    def __iter__(self):
+        return LinkedList._Iterator(self.head)
+
+
+    def add_value(self, value):
+        node = self.Node(value)
         self.size += 1
         currentnode = self.head
         while currentnode != None:
@@ -24,12 +42,12 @@ class linkedlist():
         
 
 
-    def insertValue(self, index, value):
+    def insert_value(self, index, value):
         if self.size < index or index < 0: #index out of range
             print("Index out of range")
             return -1
         else:
-            node = self.node(value)
+            node = self.Node(value)
             self.size += 1
             if index == 0: #insert at front
                 node.next = self.head
@@ -46,7 +64,7 @@ class linkedlist():
 
              
 
-    def removefirstValue(self, value): #remove first instance of value
+    def remove_first_value(self, value): #remove first instance of value
         currentnode = self.head
         previousnode = self.head
         if self.head.value == value:
@@ -64,7 +82,7 @@ class linkedlist():
 
 
 
-    def removeAllValue(self, value): #remove any instances of value
+    def remove_all_value(self, value): #remove any instances of value
         currentnode = self.head
         previousnode = self.head
         while currentnode != None:
@@ -80,7 +98,7 @@ class linkedlist():
 
         
 
-    def removeIndex(self, index):
+    def remove_index(self, index):
         if self.size < index or self.size < 1 or index < 0: #index out of range
             print("Index out of range")
             return -1
@@ -98,13 +116,13 @@ class linkedlist():
 
             
 
-    def removeAll(self):
+    def remove_all(self):
         self.head = None
         self.size = 0
 
 
 
-    def searchValue(self, value): # Returns the index for first matching value
+    def search_value(self, value): # Returns the index for first matching value
         currentnode = self.head
 
         index = 0
@@ -117,7 +135,7 @@ class linkedlist():
     
 
 
-    def searchAllValue(self, value): # Returns list of index values for each matching value 
+    def search_all_value(self, value): # Returns list of index values for each matching value 
         currentnode = self.head
         indexes = []
 
@@ -131,7 +149,7 @@ class linkedlist():
     
         
 
-    def searchIndex(self, index): # Returns value at index
+    def search_index(self, index): # Returns value at index
         if self.size < index or self.size < 1 or index < 0: #index out of range
             print("Index out of range")
             return -1
@@ -143,7 +161,7 @@ class linkedlist():
 
 
 
-    def updateIndex(self, index, value): # by index
+    def update_index(self, index, value): # by index
         if self.size < index or self.size < 1 or index < 0: #index out of range
             print("Index out of range")
             return -1
@@ -155,7 +173,7 @@ class linkedlist():
 
 
 
-    def getSize(self):
+    def get_size(self):
         return self.size
 
 
@@ -165,18 +183,10 @@ class linkedlist():
 
 
 
-    def returnList(self):
+    def return_list(self):
         currentnode = self.head
         returnlist = []
         while currentnode != None:
             returnlist.append(currentnode.value)
             currentnode = currentnode.next
         return returnlist
-
-
-
-
-
-newlist = linkedlist()
-
-
